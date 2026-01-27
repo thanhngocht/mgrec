@@ -1,0 +1,58 @@
+2025-12-30 08:56:22,936 - {'optimizer': {'name': 'adam', 'lr': 0.001, 'weight_decay': 0}, 'train': {'epoch': 150, 'batch_size': 512, 'save_model': True, 'log_loss': False, 'test_step': 1, 'reproducible': True, 'seed': 2023, 'early_stop': True, 'patience': 20}, 'test': {'metrics': ['mrr', 'ndcg'], 'k': [5, 10, 20], 'batch_size': 512}, 'data': {'type': 'sequential', 'name': 'music', 'seq_aug': True, 'dir': './datasets/sequential/music_seq/', 'user_num': 71275, 'item_num': 73371}, 'model': {'name': 'mgrec', 'dropout_rate': 0.1, 'graph_dropout_prob': 0.3, 'n_layers': 2, 'embedding_size': 64, 'n_heads': 2, 'max_seq_len': 50, 'cl_lambda': 0.0001, 'cl_temp': 0.8, 'weight_mean': 0.4, 'sim_group_k': 4, 'kl_weight': 0.01}, 'tune': {'enable': False, 'hyperparameters': ['cl_lambda', 'weight_mean'], 'cl_lambda': [0.0001, 0.001, 0.01], 'weight_mean': [0.4, 0.5, 0.6]}, 'bre': {'bre_model_name': 'bert-base-uncased', 'bre_max_len': 32, 'out_dim': 64, 'dropout': 0.2, 'bre_freeze_bert': True, 'bre_pooling': 'mean', 'bre_normalize': True}, 'device': 'cuda'}
+2025-12-30 09:05:19,128 - Epoch   0 Test set [mrr@5: 0.0060 mrr@10: 0.0070 mrr@20: 0.0077 ] Test set [ndcg@5: 0.0073 ndcg@10: 0.0096 ndcg@20: 0.0122 ] 
+2025-12-30 09:05:19,161 - Validation score increased.  Copying the best model ...
+2025-12-30 09:14:15,121 - Epoch   1 Test set [mrr@5: 0.0086 mrr@10: 0.0099 mrr@20: 0.0108 ] Test set [ndcg@5: 0.0106 ndcg@10: 0.0138 ndcg@20: 0.0172 ] 
+2025-12-30 09:14:15,149 - Validation score increased.  Copying the best model ...
+2025-12-30 09:23:11,465 - Epoch   2 Test set [mrr@5: 0.0112 mrr@10: 0.0126 mrr@20: 0.0137 ] Test set [ndcg@5: 0.0134 ndcg@10: 0.0170 ndcg@20: 0.0210 ] 
+2025-12-30 09:23:11,491 - Validation score increased.  Copying the best model ...
+2025-12-30 09:32:09,778 - Epoch   3 Test set [mrr@5: 0.0120 mrr@10: 0.0135 mrr@20: 0.0146 ] Test set [ndcg@5: 0.0144 ndcg@10: 0.0180 ndcg@20: 0.0221 ] 
+2025-12-30 09:32:09,804 - Validation score increased.  Copying the best model ...
+2025-12-30 09:41:05,637 - Epoch   4 Test set [mrr@5: 0.0120 mrr@10: 0.0137 mrr@20: 0.0148 ] Test set [ndcg@5: 0.0144 ndcg@10: 0.0185 ndcg@20: 0.0225 ] 
+2025-12-30 09:41:05,664 - Validation score increased.  Copying the best model ...
+2025-12-30 09:50:02,070 - Epoch   5 Test set [mrr@5: 0.0126 mrr@10: 0.0141 mrr@20: 0.0153 ] Test set [ndcg@5: 0.0152 ndcg@10: 0.0189 ndcg@20: 0.0232 ] 
+2025-12-30 09:50:02,096 - Validation score increased.  Copying the best model ...
+2025-12-30 09:58:56,438 - Epoch   6 Test set [mrr@5: 0.0125 mrr@10: 0.0140 mrr@20: 0.0151 ] Test set [ndcg@5: 0.0150 ndcg@10: 0.0188 ndcg@20: 0.0228 ] 
+2025-12-30 09:58:56,438 - Early stop counter: 1 out of 20
+2025-12-30 10:07:50,762 - Epoch   7 Test set [mrr@5: 0.0125 mrr@10: 0.0141 mrr@20: 0.0152 ] Test set [ndcg@5: 0.0150 ndcg@10: 0.0188 ndcg@20: 0.0229 ] 
+2025-12-30 10:07:50,763 - Early stop counter: 2 out of 20
+2025-12-30 10:16:49,044 - Epoch   8 Test set [mrr@5: 0.0125 mrr@10: 0.0140 mrr@20: 0.0151 ] Test set [ndcg@5: 0.0149 ndcg@10: 0.0185 ndcg@20: 0.0226 ] 
+2025-12-30 10:16:49,044 - Early stop counter: 3 out of 20
+2025-12-30 10:25:45,032 - Epoch   9 Test set [mrr@5: 0.0121 mrr@10: 0.0135 mrr@20: 0.0146 ] Test set [ndcg@5: 0.0145 ndcg@10: 0.0180 ndcg@20: 0.0218 ] 
+2025-12-30 10:25:45,032 - Early stop counter: 4 out of 20
+2025-12-30 10:34:42,395 - Epoch  10 Test set [mrr@5: 0.0121 mrr@10: 0.0136 mrr@20: 0.0146 ] Test set [ndcg@5: 0.0145 ndcg@10: 0.0180 ndcg@20: 0.0218 ] 
+2025-12-30 10:34:42,395 - Early stop counter: 5 out of 20
+2025-12-30 10:43:37,201 - Epoch  11 Test set [mrr@5: 0.0120 mrr@10: 0.0133 mrr@20: 0.0143 ] Test set [ndcg@5: 0.0142 ndcg@10: 0.0175 ndcg@20: 0.0213 ] 
+2025-12-30 10:43:37,202 - Early stop counter: 6 out of 20
+2025-12-30 10:52:36,012 - Epoch  12 Test set [mrr@5: 0.0120 mrr@10: 0.0133 mrr@20: 0.0143 ] Test set [ndcg@5: 0.0142 ndcg@10: 0.0175 ndcg@20: 0.0209 ] 
+2025-12-30 10:52:36,012 - Early stop counter: 7 out of 20
+2025-12-30 11:01:32,598 - Epoch  13 Test set [mrr@5: 0.0115 mrr@10: 0.0128 mrr@20: 0.0137 ] Test set [ndcg@5: 0.0137 ndcg@10: 0.0169 ndcg@20: 0.0203 ] 
+2025-12-30 11:01:32,598 - Early stop counter: 8 out of 20
+2025-12-30 11:10:28,571 - Epoch  14 Test set [mrr@5: 0.0119 mrr@10: 0.0132 mrr@20: 0.0142 ] Test set [ndcg@5: 0.0140 ndcg@10: 0.0172 ndcg@20: 0.0209 ] 
+2025-12-30 11:10:28,571 - Early stop counter: 9 out of 20
+2025-12-30 11:19:23,018 - Epoch  15 Test set [mrr@5: 0.0115 mrr@10: 0.0128 mrr@20: 0.0138 ] Test set [ndcg@5: 0.0138 ndcg@10: 0.0169 ndcg@20: 0.0205 ] 
+2025-12-30 11:19:23,019 - Early stop counter: 10 out of 20
+2025-12-30 11:28:20,357 - Epoch  16 Test set [mrr@5: 0.0115 mrr@10: 0.0128 mrr@20: 0.0138 ] Test set [ndcg@5: 0.0137 ndcg@10: 0.0169 ndcg@20: 0.0205 ] 
+2025-12-30 11:28:20,358 - Early stop counter: 11 out of 20
+2025-12-30 11:37:15,035 - Epoch  17 Test set [mrr@5: 0.0111 mrr@10: 0.0124 mrr@20: 0.0134 ] Test set [ndcg@5: 0.0132 ndcg@10: 0.0165 ndcg@20: 0.0199 ] 
+2025-12-30 11:37:15,036 - Early stop counter: 12 out of 20
+2025-12-30 11:46:13,034 - Epoch  18 Test set [mrr@5: 0.0106 mrr@10: 0.0118 mrr@20: 0.0128 ] Test set [ndcg@5: 0.0126 ndcg@10: 0.0157 ndcg@20: 0.0192 ] 
+2025-12-30 11:46:13,035 - Early stop counter: 13 out of 20
+2025-12-30 11:55:08,218 - Epoch  19 Test set [mrr@5: 0.0110 mrr@10: 0.0122 mrr@20: 0.0131 ] Test set [ndcg@5: 0.0132 ndcg@10: 0.0162 ndcg@20: 0.0196 ] 
+2025-12-30 11:55:08,218 - Early stop counter: 14 out of 20
+2025-12-30 12:04:08,168 - Epoch  20 Test set [mrr@5: 0.0105 mrr@10: 0.0118 mrr@20: 0.0127 ] Test set [ndcg@5: 0.0126 ndcg@10: 0.0157 ndcg@20: 0.0190 ] 
+2025-12-30 12:04:08,168 - Early stop counter: 15 out of 20
+2025-12-30 12:13:05,132 - Epoch  21 Test set [mrr@5: 0.0108 mrr@10: 0.0121 mrr@20: 0.0130 ] Test set [ndcg@5: 0.0128 ndcg@10: 0.0158 ndcg@20: 0.0191 ] 
+2025-12-30 12:13:05,133 - Early stop counter: 16 out of 20
+2025-12-30 12:22:02,841 - Epoch  22 Test set [mrr@5: 0.0102 mrr@10: 0.0114 mrr@20: 0.0123 ] Test set [ndcg@5: 0.0122 ndcg@10: 0.0152 ndcg@20: 0.0183 ] 
+2025-12-30 12:22:02,842 - Early stop counter: 17 out of 20
+2025-12-30 12:30:58,728 - Epoch  23 Test set [mrr@5: 0.0108 mrr@10: 0.0121 mrr@20: 0.0129 ] Test set [ndcg@5: 0.0128 ndcg@10: 0.0158 ndcg@20: 0.0190 ] 
+2025-12-30 12:30:58,729 - Early stop counter: 18 out of 20
+2025-12-30 12:39:55,361 - Epoch  24 Test set [mrr@5: 0.0102 mrr@10: 0.0114 mrr@20: 0.0122 ] Test set [ndcg@5: 0.0121 ndcg@10: 0.0150 ndcg@20: 0.0181 ] 
+2025-12-30 12:39:55,362 - Early stop counter: 19 out of 20
+2025-12-30 12:48:49,931 - Epoch  25 Test set [mrr@5: 0.0104 mrr@10: 0.0116 mrr@20: 0.0124 ] Test set [ndcg@5: 0.0124 ndcg@10: 0.0153 ndcg@20: 0.0184 ] 
+2025-12-30 12:48:49,932 - Early stop counter: 20 out of 20
+2025-12-30 12:48:49,932 - Best Epoch 5
+2025-12-30 12:50:10,752 - Test set [mrr@5: 0.0126 mrr@10: 0.0141 mrr@20: 0.0153 ] Test set [ndcg@5: 0.0152 ndcg@10: 0.0189 ndcg@20: 0.0232 ] 
+2025-12-30 12:51:29,540 - Test set [mrr@5: 0.0126 mrr@10: 0.0141 mrr@20: 0.0153 ] Test set [ndcg@5: 0.0152 ndcg@10: 0.0189 ndcg@20: 0.0232 ] 
+2025-12-30 12:51:30,136 - Save model parameters to ./checkpoint/mgrec/mgrec-1767099089.pth
+2025-12-30 12:52:49,560 - Test set [mrr@5: 0.0126 mrr@10: 0.0141 mrr@20: 0.0153 ] Test set [ndcg@5: 0.0152 ndcg@10: 0.0189 ndcg@20: 0.0232 ] 
