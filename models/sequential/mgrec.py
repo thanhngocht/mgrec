@@ -16,26 +16,26 @@ from transformers import AutoTokenizer, AutoModel
 
 # Multi-view Graph 4 RECommendation: MGRec
 
-def graph_augment(g: dgl.DGLGraph, user_ids, user_edges):
-    # Augment the graph with the item sequence, deleting co-occurrence edges in the batched sequences
-    # generating indicies like: [1,2] [2,3] ... as the co-occurrence rel.
-    # indexing edge data using node indicies and delete them
-    # for edge weights, delete them from the raw data using indexed edges
-    user_ids = user_ids.cpu().numpy()
-    node_indicies_a = np.concatenate(
-        user_edges.loc[user_ids, "item_edges_a"].to_numpy())
-    node_indicies_b = np.concatenate(
-        user_edges.loc[user_ids, "item_edges_b"].to_numpy())
-    node_indicies_a = torch.from_numpy(
-        node_indicies_a).to(g.device)
-    node_indicies_b = torch.from_numpy(
-        node_indicies_b).to(g.device)
-    edge_ids = g.edge_ids(node_indicies_a, node_indicies_b)
+# def graph_augment(g: dgl.DGLGraph, user_ids, user_edges):
+#     # Augment the graph with the item sequence, deleting co-occurrence edges in the batched sequences
+#     # generating indicies like: [1,2] [2,3] ... as the co-occurrence rel.
+#     # indexing edge data using node indicies and delete them
+#     # for edge weights, delete them from the raw data using indexed edges
+#     user_ids = user_ids.cpu().numpy()
+#     node_indicies_a = np.concatenate(
+#         user_edges.loc[user_ids, "item_edges_a"].to_numpy())
+#     node_indicies_b = np.concatenate(
+#         user_edges.loc[user_ids, "item_edges_b"].to_numpy())
+#     node_indicies_a = torch.from_numpy(
+#         node_indicies_a).to(g.device)
+#     node_indicies_b = torch.from_numpy(
+#         node_indicies_b).to(g.device)
+#     edge_ids = g.edge_ids(node_indicies_a, node_indicies_b)
 
-    aug_g: dgl.DGLGraph = deepcopy(g)
-    # The features for the removed edges will be removed accordingly.
-    aug_g.remove_edges(edge_ids)
-    return aug_g
+#     aug_g: dgl.DGLGraph = deepcopy(g)
+#     # The features for the removed edges will be removed accordingly.
+#     aug_g.remove_edges(edge_ids)
+#     return aug_g
 
 
 def graph_dropout(g: dgl.DGLGraph, keep_prob):
@@ -52,31 +52,31 @@ def graph_dropout(g: dgl.DGLGraph, keep_prob):
 
     return origin_edge_w, g
 
-def build_ui_interaction_graph(batch_user, batch_seqs, item_num, device):
-    # Build a batch of user-item interaction graphs using DGL
-    batch_size = batch_user.size(0)
-    ui_interaction_graphs = []
+# def build_ui_interaction_graph(batch_user, batch_seqs, item_num, device):
+#     # Build a batch of user-item interaction graphs using DGL
+#     batch_size = batch_user.size(0)
+#     ui_interaction_graphs = []
     
-    for batch_idx in range(batch_size):
-        user_id = batch_user[batch_idx].item()
-        items = batch_seqs[batch_idx][batch_seqs[batch_idx] > 0]  # filter out padding (0s)
+#     for batch_idx in range(batch_size):
+#         user_id = batch_user[batch_idx].item()
+#         items = batch_seqs[batch_idx][batch_seqs[batch_idx] > 0]  # filter out padding (0s)
         
-        if len(items) == 0:
-            # Handle empty sequence case
-            g = dgl.graph(([], []), num_nodes=item_num + 1, device=device)
-        else:
-            # Create edges from user to items
-            src_nodes = torch.full((len(items),), user_id, device=device)
-            dst_nodes = items.to(device)
-            g = dgl.graph((src_nodes, dst_nodes), num_nodes=item_num + 1, device=device)
-            # Set edge weights to 1
-            g.edata['w'] = torch.ones(g.num_edges(), device=device)
+#         if len(items) == 0:
+#             # Handle empty sequence case
+#             g = dgl.graph(([], []), num_nodes=item_num + 1, device=device)
+#         else:
+#             # Create edges from user to items
+#             src_nodes = torch.full((len(items),), user_id, device=device)
+#             dst_nodes = items.to(device)
+#             g = dgl.graph((src_nodes, dst_nodes), num_nodes=item_num + 1, device=device)
+#             # Set edge weights to 1
+#             g.edata['w'] = torch.ones(g.num_edges(), device=device)
         
-        ui_interaction_graphs.append(g)
+#         ui_interaction_graphs.append(g)
     
-    # Stack graphs into a batch
-    ui_interaction_graph = dgl.batch(ui_interaction_graphs)
-    return ui_interaction_graph
+#     # Stack graphs into a batch
+#     ui_interaction_graph = dgl.batch(ui_interaction_graphs)
+#     return ui_interaction_graph
 
 def recency_attention(batch_seqs, item_emb):
     B, N, D = item_emb.shape
