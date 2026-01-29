@@ -351,12 +351,12 @@ class DCRec_seq(BaseModel):
         cl_loss = (self.cl_lambda * (mainstream_weights *
                                      cl_loss_adj + personlization_weights * cl_loss_a2s)).mean()
         # Fusion After CL
-        # 3, N_mask, dim
+      
         mixed_x = torch.stack(
             (seq_output, adj_graph_emb[last_items], sim_graph_emb[last_items]), dim=0)
         weights = (torch.matmul(
             mixed_x, self.attn_weights.unsqueeze(0))*self.attn).sum(-1)
-        # 3, N_mask, 1
+    
         score = F.softmax(weights, dim=0).unsqueeze(-1)
         seq_output = (mixed_x*score).sum(0)
         # [item_num, H]
@@ -382,12 +382,12 @@ class DCRec_seq(BaseModel):
         iadj_graph_output_raw = self.gcn_forward(adj_graph)
         iadj_graph_output_seq = iadj_graph_output_raw[last_items]
         isim_graph_output_seq = self.gcn_forward(sim_graph)[last_items]
-        # 3, N_mask, dim
+
         mixed_x = torch.stack(
             (seq_output, iadj_graph_output_seq, isim_graph_output_seq), dim=0)
         weights = (torch.matmul(
             mixed_x, self.attn_weights.unsqueeze(0))*self.attn).sum(-1)
-        # 3, N_mask, 1
+   
         score = F.softmax(weights, dim=0).unsqueeze(-1)
         seq_output = (mixed_x*score).sum(0)
 

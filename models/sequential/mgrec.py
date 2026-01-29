@@ -301,11 +301,11 @@ class MGRec(BaseModel):
         #3
         review_emb = self.bre(batch_reviews, self.device)
 
-        # 3*B, N, dim
+        # 4BLD 
         hybrid_emb = torch.stack(
             (seq_emb, attn_transition_emb, attn_co_interaction_emb, review_emb), dim=0)
-        weights = (torch.matmul(hybrid_emb, self.attn_weights.unsqueeze(0))*self.attn).sum(-1)
-        # 3*B, N, 1
+        weights = (torch.matmul(hybrid_emb, self.attn_weights.unsqueeze(0))*self.attn).sum(-1) # @ 1DD @ 1D
+        # 4BL1
         score = F.softmax(weights, dim=0).unsqueeze(-1)
         seq_output = (hybrid_emb*score).sum(0)
         # [item_num, H]
@@ -335,12 +335,12 @@ class MGRec(BaseModel):
 
         seq_emb = self.forward(batch_seqs)
         
-        # 3, N_mask, dim
+  
         hybrid_emb = torch.stack(
             (seq_emb, attn_transition_emb, attn_co_interaction_emb, review_emb), dim=0)
         weights = (torch.matmul(
             hybrid_emb, self.attn_weights.unsqueeze(0))*self.attn).sum(-1)
-        # 3, N_mask, 1
+  
         score = F.softmax(weights, dim=0).unsqueeze(-1)
         seq_output = (hybrid_emb*score).sum(0)
 
