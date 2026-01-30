@@ -225,22 +225,18 @@ class MGRec(BaseModel):
         transition_graph_emb = self.gcn_forward(self.transition_graph) # [B, N_node_train, D]
         co_interaction_graph_emb = self.gcn_forward(self.co_interaction_graph)
 
-        # print(f"batch_seqs shape: {batch_seqs.shape}")
-        # print(f"transition_graph_emb shape: {transition_graph_emb.shape}")
+
 
         attn_transition_emb = recency_attention(batch_seqs, transition_graph_emb[batch_seqs])
         attn_co_interaction_emb = recency_attention(batch_seqs, co_interaction_graph_emb[batch_seqs])
 
         
 
-        # print(f"review_emb shape: {review_emb.shape}")
-        # print(f"attn_transition_emb shape: {attn_transition_emb.shape}")
-        # print(f"attn_co_interaction_emb shape: {attn_co_interaction_emb.shape}")
 
         #2
         seq_emb = self.forward(batch_seqs)
 
-        # print(f"seq_emb shape: {seq_emb.shape}")
+     
 
         #3
         review_emb = self.bre(batch_reviews, self.device)
